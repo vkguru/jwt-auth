@@ -13,7 +13,7 @@ router.post("/register", validInfo, async(req, res) => {
             email
         ]);
         if(user.rows.length !== 0) {
-            return res.status(401).send("User already exist");
+            return res.status(401).json("User already exist");
         }
 
         const saltRound = 10;
@@ -29,8 +29,8 @@ router.post("/register", validInfo, async(req, res) => {
         return res.json({token})
 
     } catch(err) {
-        console.log(err.message);
-        res.status(500).send("Server Error");
+        // console.log(err.message);
+        res.status(500).json("Server Error");
     }
 });
 
@@ -54,7 +54,7 @@ router.post("/login", validInfo, async(req, res) => {
         return res.json({token});
 
     } catch(err) {
-        console.log(err.message);
+        // console.log(err.message);
         res.status(500).send("Server Error");
     }
 });
@@ -63,7 +63,7 @@ router.get("/verify", authorization, async(req, res) => {
     try {
         res.json(true);
     } catch (err) {
-        console.log(err.message);
+        // console.log(err.message);
         res.status(500).send("Server Error");
     }
 });
